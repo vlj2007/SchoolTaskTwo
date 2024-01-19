@@ -1,0 +1,21 @@
+package ru.hogwarts.schooltasktwo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import ru.hogwarts.schooltasktwo.model.Student;
+
+import java.util.Collection;
+import java.util.List;
+
+@Repository
+public interface StudentRepository extends JpaRepository<Student, Long> {
+
+    List<Student> findStudentByAge(int age);
+
+    List<Student> findStudentByName(String name);
+
+
+
+//    Collection<Student> findStudentByAge2(int age);
+//    Collection<Student> findAllByAgeContains(int age);
+}
