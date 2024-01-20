@@ -9,16 +9,23 @@ import ru.hogwarts.schooltasktwo.service.StudentService;
 
 import java.util.Collection;
 
-@AllArgsConstructor
+
 @RestController
 @RequestMapping("students")
 public class StudentController {
 
-    private final StudentService studentService;
+    public StudentController() {
+    }
+
+    private StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @PostMapping //POST localhost:8080/students/1 (для отправки данных на сервер, создаем студента)
-    public Student createStudent(Student student) {
-        return studentService.createdStudent(student);
+    public ResponseEntity<Student> createStudent(Student student) {
+        return ResponseEntity.ok(studentService.createdStudent(student));
     }
 
     @GetMapping("{id}") //http://localhost:8080/students/4 (для получения данных с сервера, выводит студента по id)
@@ -56,17 +63,24 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping(path = "/between")
+    public Collection<Student> findByAgeBetween(int min, int max){
+        return studentService.findByAgeBetween(min, max);
+    }
 
 
-//    @GetMapping(path = "/find") // http://localhost:8080/students/find
-//    public ResponseEntity findStudentByAge(@RequestParam String name, @RequestParam int age) {
+
+//    @GetMapping(path = "/age") // http://localhost:8080/students/find
+//    public ResponseEntity<Student> findStudentByAge(@RequestParam(required = false) Long id,
+//                                           @RequestParam(required = false) String name,
+//                                           @RequestParam(required = false) int age) {
 //        if (name !=null && !name.isBlank()){
-//            return ResponseEntity.ok(studentService.findStudentByName(name));
+//            return ResponseEntity.ok((Student) studentService.findStudentByName(name));
 //        }
 //        if (age != 0){
-//            return ResponseEntity.ok(studentService.findStudentByAge(age));
+//            return ResponseEntity.ok((Student) studentService.findStudentByAge(age));
 //        }
-//        return ResponseEntity.ok(studentService.findAllByAgeContains(age));
+//        return ResponseEntity.ok(studentService.findStudent(id));
 //    }
 
 }

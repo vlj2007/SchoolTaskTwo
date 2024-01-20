@@ -10,12 +10,19 @@ import ru.hogwarts.schooltasktwo.repository.StudentRepository;
 
 import java.util.Collection;
 import java.util.List;
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Service
 public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
+
+
+    public StudentService() {
+    }
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     public Student createdStudent(Student student) {
         return studentRepository.save(student);
@@ -49,18 +56,9 @@ public class StudentService {
         return studentRepository.findStudentByAge(age);
     }
 
-    public List<Student> findStudentByName(String name) {
-        return studentRepository.findStudentByName(name);
+    public Collection<Student> findByAgeBetween(int min, int max){
+        return studentRepository.findByBetween(min, max);
     }
 
-
-
-//    public Collection<Student> findStudentByAge2(int age){
-//        return studentRepository.findStudentByAge2(age);
-//    }
-//
-//    public Collection<Student> findAllByAgeContains(int age){
-//        return studentRepository.findAllByAgeContains(age);
-//    }
 
 }

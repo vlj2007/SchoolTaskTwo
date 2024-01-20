@@ -8,12 +8,17 @@ import ru.hogwarts.schooltasktwo.service.FacultyService;
 
 import java.util.Collection;
 import java.util.Collections;
-@AllArgsConstructor
+
 @RestController
 @RequestMapping("faculty")
 public class FacultyController {
-
     private final FacultyService facultyService;
+
+    public FacultyController(FacultyService facultyService) {
+        this.facultyService = facultyService;
+    }
+
+
 
     @PostMapping //POST localhost:8080/faculty/1
     public Faculty createFaculty(@PathVariable Faculty id) {
@@ -58,6 +63,5 @@ public class FacultyController {
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
-
 
 }

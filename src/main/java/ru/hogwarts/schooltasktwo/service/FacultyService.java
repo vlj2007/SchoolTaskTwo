@@ -9,13 +9,19 @@ import ru.hogwarts.schooltasktwo.repository.FacultyRepository;
 import ru.hogwarts.schooltasktwo.exception.BadRequestException;
 
 import java.util.List;
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Service
 public class FacultyService {
 
     @Autowired
     private FacultyRepository facultyRepository;
+
+    public FacultyService() {
+    }
+
+    public FacultyService(FacultyRepository facultyRepository) {
+        this.facultyRepository = facultyRepository;
+    }
 
     public Faculty createFaculty(Faculty faculty) {
         return facultyRepository.save(faculty);
