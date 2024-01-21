@@ -1,6 +1,8 @@
 package ru.hogwarts.schooltasktwo.controller;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,7 @@ import ru.hogwarts.schooltasktwo.model.Student;
 import ru.hogwarts.schooltasktwo.service.StudentService;
 
 import java.util.Collection;
+import java.util.List;
 
 
 @RestController
@@ -16,7 +19,7 @@ public class StudentController {
 
     public StudentController() {
     }
-
+    @Autowired
     private StudentService studentService;
 
     public StudentController(StudentService studentService) {
@@ -63,11 +66,12 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(path = "/between")
-    public Collection<Student> findByAgeBetween(int min, int max){
-        return studentService.findByAgeBetween(min, max);
-    }
+ //   @GetMapping("/findAllByAgeBetween")
+ //   public Collection<Student> findByAgeBetween(@RequestParam(required = false) Integer min,
+ //                                         @RequestParam(required = false) Integer max) {
+ //       return studentService.findByAgeBetween(min, max);
 
+  //  }
 
 
 //    @GetMapping(path = "/age") // http://localhost:8080/students/find

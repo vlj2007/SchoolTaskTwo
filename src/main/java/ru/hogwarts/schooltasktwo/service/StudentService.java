@@ -1,7 +1,5 @@
 package ru.hogwarts.schooltasktwo.service;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.schooltasktwo.exception.BadRequestException;
@@ -56,9 +54,10 @@ public class StudentService {
         return studentRepository.findStudentByAge(age);
     }
 
-    public Collection<Student> findByAgeBetween(int min, int max){
-        return studentRepository.findByBetween(min, max);
-    }
+
+ //   public Collection<Student> findByAgeBetween(Integer min, Integer max) {
+//        return studentRepository.findByAgeBetween(min, max);
+ //   }
 
 
 }

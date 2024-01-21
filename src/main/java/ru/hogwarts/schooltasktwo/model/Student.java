@@ -17,7 +17,7 @@ public class Student {
     @Column
     private int age;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
