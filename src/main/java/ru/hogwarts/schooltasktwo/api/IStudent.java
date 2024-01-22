@@ -10,19 +10,11 @@ import java.util.List;
 public interface IStudent {
 
     Student createdStudent(Student student);
-
     Student editStudent(Student student);
-
     Student findStudent(Long id);
-
     void deleteStudent(long id);
-
     void deleteAllStudents(Student student);
-
     void deleteAllStudents();
-
     Collection<Student> getAllStudent();
-
-    List<Student> findStudentByAge(int age);
-
+    Collection<Student> findByAgeBetween(Integer min, Integer max);
 }
