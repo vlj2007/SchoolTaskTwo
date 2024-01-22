@@ -19,6 +19,7 @@ public class StudentController {
 
     public StudentController() {
     }
+
     @Autowired
     private StudentService studentService;
 
@@ -55,6 +56,13 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
+
+    @DeleteMapping("/delete/all") //DELETE http://localhost:8080/students/2 (для удаления данных студента)
+    public ResponseEntity<Void> deleteAllStudent() {
+        studentService.deleteAllStudents();
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping(path = "/find") //http://localhost:8080/students/find
     public Collection<Student> getStudents() {
         return studentService.getAllStudent();
@@ -66,25 +74,11 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
- //   @GetMapping("/findAllByAgeBetween")
- //   public Collection<Student> findByAgeBetween(@RequestParam(required = false) Integer min,
- //                                         @RequestParam(required = false) Integer max) {
- //       return studentService.findByAgeBetween(min, max);
+    @GetMapping("/findByAgeBetween")
+    public Collection<Student> findByAgeBetween(@RequestParam(required = false) Integer min,
+                                                @RequestParam(required = false) Integer max) {
+        return studentService.findByAgeBetween(min, max);
 
-  //  }
-
-
-//    @GetMapping(path = "/age") // http://localhost:8080/students/find
-//    public ResponseEntity<Student> findStudentByAge(@RequestParam(required = false) Long id,
-//                                           @RequestParam(required = false) String name,
-//                                           @RequestParam(required = false) int age) {
-//        if (name !=null && !name.isBlank()){
-//            return ResponseEntity.ok((Student) studentService.findStudentByName(name));
-//        }
-//        if (age != 0){
-//            return ResponseEntity.ok((Student) studentService.findStudentByAge(age));
-//        }
-//        return ResponseEntity.ok(studentService.findStudent(id));
-//    }
+    }
 
 }

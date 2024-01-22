@@ -1,12 +1,12 @@
 package ru.hogwarts.schooltasktwo.service;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import ru.hogwarts.schooltasktwo.exception.FacultyListsIsEmptyException;
+import ru.hogwarts.schooltasktwo.exception.FacultyNotFoundException;
 import ru.hogwarts.schooltasktwo.model.Faculty;
 import ru.hogwarts.schooltasktwo.repository.FacultyRepository;
-import ru.hogwarts.schooltasktwo.exception.BadRequestException;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class FacultyService {
         this.facultyRepository = facultyRepository;
     }
 
-    public Faculty createFaculty(Faculty faculty) {
+    public Faculty createFaculty(long id, Faculty faculty) {
         return facultyRepository.save(faculty);
     }
 
@@ -32,11 +32,17 @@ public class FacultyService {
     }
 
     public Faculty findFaculty(Long id) {
-        return facultyRepository.findById(id).orElseThrow(() -> new BadRequestException("Отсутствует id"));
+        return facultyRepository.findById(id)
+                .orElseThrow(() -> new FacultyNotFoundException("Not found element"));
     }
 
-    public void deleteAllFaculty(long id) {
-        facultyRepository.deleteById(id);
+    public Faculty deleteFaculty(long id) {
+        Faculty faculty = facultyRepository.findById(id)
+                .orElseThrow(() -> new FacultyNotFoundException("Not found element"));
+        facultyRepository.delete(faculty);
+        return faculty;
+
+
     }
 
     public void deleteAllFaculty(Faculty faculty) {
@@ -48,11 +54,15 @@ public class FacultyService {
         return facultyRepository.findAll();
     }
 
-    public List<Faculty> findByName(String name) {
-        return facultyRepository.findByName(name);
+    public Faculty findByName(String name) {
+        return facultyRepository.findFacultyByNameIgnoreCase(name);
     }
 
     public List<Faculty> findByColor(String color) {
-        return facultyRepository.findByColor(color);
+        List<Faculty> facultyList = facultyRepository.findByColor(color);
+        if(facultyList.isEmpty()){
+            throw new FacultyListsIsEmptyException("Lists is empty.");
+        }
+        return facultyList;
     }
 }

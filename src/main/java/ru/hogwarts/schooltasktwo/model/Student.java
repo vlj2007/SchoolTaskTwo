@@ -21,6 +21,10 @@ public class Student {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
+    public Faculty getFaculty(){
+        return faculty;
+    }
+
     public Student() {
     }
 

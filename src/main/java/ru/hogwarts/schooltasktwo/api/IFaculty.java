@@ -7,20 +7,13 @@ import java.util.List;
 
 public interface IFaculty {
 
-    Faculty createFaculty(Faculty faculty);
-
+    Faculty createFaculty(long id, Faculty faculty);
     Faculty editFaculty(Faculty faculty);
-
     Faculty findFaculty(Long id);
-
-    void deleteAllFaculty(long id);
-
+    Faculty deleteFaculty(long id);
     void deleteAllFaculty(Faculty faculty);
-
     List<Faculty> showAllFaculty();
-
-    List<Faculty> findByName(String name);
-
+    Faculty findByName(String name);
     List<Faculty> findByColor(String color);
 
 }
