@@ -1,8 +1,10 @@
 package ru.hogwarts.schooltasktwo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,8 +18,17 @@ public class Faculty {
     @Column
     private String color;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "faculty")
-    private Set<Student> studentSet;
+    private List<Student> student;
+
+    public List<Student> getStudents() {
+        return student;
+    }
+
+    public void setStudent(List<Student> student) {
+        this.student = student;
+    }
 
     public Faculty() {
     }

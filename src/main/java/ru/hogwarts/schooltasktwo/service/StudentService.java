@@ -29,10 +29,8 @@ public class StudentService {
     }
 
     public Student findStudent(Long id) {
-        return studentRepository.  findById(id).orElseThrow(() -> new BadRequestException("Отсутствует id"));
+        return studentRepository.findById(id).orElseThrow(() -> new BadRequestException("Отсутствует id"));
     }
-
-
 
     public void deleteStudent(long id) {
         studentRepository.deleteById(id);
@@ -57,6 +55,16 @@ public class StudentService {
     public Collection<Student> findByAgeBetween(int min, int max){
         return studentRepository.findByAgeBetween(min, max);
     }
+
+    public Collection<Student> findStudentByName(String name){
+        return studentRepository.findStudentByName(name);
+    }
+
+    public Collection<Student> findStudentByNameIgnoreCase(String name){
+        return studentRepository.findStudentByNameIgnoreCase(name);
+    }
+
+
 
 
 }

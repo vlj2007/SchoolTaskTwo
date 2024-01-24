@@ -46,11 +46,18 @@ public class FacultyService {
         return facultyRepository.findAll();
     }
 
-    public List<Faculty> findByName(String name) {
-        return facultyRepository.findByName(name);
+    public List<Faculty> findFacultyByName(String name) {
+        return facultyRepository.findFacultyByName(name);
     }
 
-    public List<Faculty> findByColor(String color) {
-        return facultyRepository.findByColor(color);
+    public List<Faculty> findFacultyByColor(String color) {
+        return facultyRepository.findFacultyByColor(color);
     }
+
+//    public List<Faculty> findStudentByFaculty(Long id) {
+//        return facultyRepository.findStudentByFaculty(id);
+//    }
+
+
+
 }
