@@ -47,7 +47,7 @@ public class FacultyController {
         return facultyService.showAllFaculty();
     }
 
-    @GetMapping(path = "{name}") // http://localhost:8080/faculty/find
+    @GetMapping(path = "/name") // http://localhost:8080/faculty/name
     public ResponseEntity <?> findByName(@RequestParam String name) {
         if (name != null && !name.isBlank()) {
             return ResponseEntity.ok(facultyService.findByName(name));
@@ -55,7 +55,7 @@ public class FacultyController {
         return ResponseEntity.ok(facultyService.showAllFaculty());
     }
 
-    @GetMapping(path = "{color}")
+    @GetMapping(path = "/color")
     public ResponseEntity<?> findFaculties(@RequestParam String color) {
         if (color != null && !color.isBlank()) {
             ResponseEntity<List<Faculty>> ok = ResponseEntity.ok(facultyService.findByColor(color));
