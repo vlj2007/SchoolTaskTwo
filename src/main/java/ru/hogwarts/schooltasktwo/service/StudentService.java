@@ -14,11 +14,7 @@ import java.util.List;
 @Service
 public class StudentService {
     @Autowired
-    private StudentRepository studentRepository;
-
-
-    public StudentService() {
-    }
+    private final StudentRepository studentRepository;
 
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
@@ -33,8 +29,10 @@ public class StudentService {
     }
 
     public Student findStudent(Long id) {
-        return studentRepository.findById(id).orElseThrow(() -> new BadRequestException("Отсутствует id"));
+        return studentRepository.  findById(id).orElseThrow(() -> new BadRequestException("Отсутствует id"));
     }
+
+
 
     public void deleteStudent(long id) {
         studentRepository.deleteById(id);
@@ -57,7 +55,7 @@ public class StudentService {
     }
 
     public Collection<Student> findByAgeBetween(int min, int max){
-        return studentRepository.findByBetween(min, max);
+        return studentRepository.findByAgeBetween(min, max);
     }
 
 

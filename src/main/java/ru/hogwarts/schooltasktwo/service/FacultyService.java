@@ -14,10 +14,8 @@ import java.util.List;
 public class FacultyService {
 
     @Autowired
-    private FacultyRepository facultyRepository;
+    private final FacultyRepository facultyRepository;
 
-    public FacultyService() {
-    }
 
     public FacultyService(FacultyRepository facultyRepository) {
         this.facultyRepository = facultyRepository;

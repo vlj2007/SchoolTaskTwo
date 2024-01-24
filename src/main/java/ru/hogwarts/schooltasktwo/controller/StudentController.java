@@ -14,9 +14,6 @@ import java.util.Collection;
 @RequestMapping("students")
 public class StudentController {
 
-    public StudentController() {
-    }
-
     private StudentService studentService;
 
     public StudentController(StudentService studentService) {

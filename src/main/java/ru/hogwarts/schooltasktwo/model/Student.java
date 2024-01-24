@@ -2,6 +2,7 @@ package ru.hogwarts.schooltasktwo.model;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,14 @@ public class Student {
     @Column
     private int age;
 
-    @ManyToMany
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
 
     public Student() {
     }
