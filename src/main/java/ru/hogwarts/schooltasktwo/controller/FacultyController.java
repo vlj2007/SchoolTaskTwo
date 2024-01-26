@@ -18,8 +18,6 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
-
-
     @PostMapping //POST localhost:8080/faculty/1
     public Faculty createFaculty(@PathVariable Faculty id) {
         return facultyService.createFaculty(id);
@@ -59,15 +57,24 @@ public class FacultyController {
     @GetMapping(path = "/color")
     public ResponseEntity<Collection<Faculty>> findFacultyByColor(@RequestParam(required = false) String color) {
         if (color != null && !color.isBlank()) {
-            return ResponseEntity.ok(facultyService.findFacultyByColor(color));
+            return ResponseEntity.ok(facultyService.findFacultyByColorIgnoreCase(color));
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
 
+    @GetMapping(path = "/nameorcolor")
+    public ResponseEntity<Collection<Faculty>> findFacultyByNameOrColor(@RequestParam(required = false) String name, @RequestParam(required = false) String color) {
+        if (name != null && !name.isBlank()) {
+            ResponseEntity<Collection<Faculty>> responseEntity = ResponseEntity.ok(facultyService.findFacultyByNameIgnoreCase(name));
+            return responseEntity;
+        }
 
-//    @GetMapping(path = "/students")
-//    public ResponseEntity<Collection<Faculty>> findStudentByFaculty(@RequestParam Long id) {
-//         return ResponseEntity.ok(facultyService.findStudentByFaculty(id));
-//    }
+        if (color != null && !color.isBlank()) {
+            return ResponseEntity.ok(facultyService.findFacultyByColorIgnoreCase(color));
+        }
+
+        return ResponseEntity.ok(facultyService.showAllFaculty());
+
+    }
 
 }

@@ -1,15 +1,13 @@
 package ru.hogwarts.schooltasktwo.controller;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hogwarts.schooltasktwo.exception.BadRequestException;
 import ru.hogwarts.schooltasktwo.model.Student;
 import ru.hogwarts.schooltasktwo.service.StudentService;
 
 import java.util.Collection;
+import java.util.List;
 
 
 @RestController
@@ -68,49 +66,26 @@ public class StudentController {
     }
 
     @GetMapping(path = "/age") // http://localhost:8080/students/find
-    public ResponseEntity<Student> findStudentByAge(@RequestParam Integer age) {
-        if (age == 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    public ResponseEntity<List<Student>> findStudentByAge(@RequestParam Integer age) {
+
+        if (studentService.findStudentByAge(age).isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok((Student)studentService.findStudentByAge(age));
+        return ResponseEntity.ok((studentService.findStudentByAge(age)));
     }
 
 
-    @GetMapping(path = "/name") // http://localhost:8080/students/find
-    public ResponseEntity<Student> findStudentByNameIgnoreCase(@RequestParam String name) {
-        if (name != null) {
-            return ResponseEntity.ok((Student)studentService.findStudentByNameIgnoreCase(name));
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    @GetMapping(path = "/findstudent/{like}")
+    public Collection<Student> findStudentByNameIgnoreCaseIsLike(@PathVariable String like) {
+        return studentService.findStudentByNameIgnoreCaseIsLike(like);
     }
 
     @GetMapping(path = "/name/ignore") // http://localhost:8080/students/find
-    public ResponseEntity<Student> findStudentByName(@RequestParam String name) {
+    public ResponseEntity<Collection<Student>> findStudentByName(@RequestParam String name) {
         if (name != null) {
-            return ResponseEntity.ok((Student)studentService.findStudentByName(name));
+            return ResponseEntity.ok(studentService.findStudentByNameIgnoreCase(name));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-
-
-
-
-
-
-
-
-
-//    @GetMapping(path = "/age") // http://localhost:8080/students/find
-//    public ResponseEntity<Student> findStudentByAge(@RequestParam(required = false) Long id,
-//                                                    @RequestParam(required = false) String name,
-//                                                    @RequestParam(required = false) Integer age) {
-//        if (name != null && !name.isBlank()) {
-//            return ResponseEntity.ok((Student) studentService.findStudentByName(name));
-//        }
-//        if (age != 0) {
-//            return ResponseEntity.ok((Student) studentService.findStudentByAge(age));
-//        }
-//        return ResponseEntity.ok(studentService.findStudent(id));
-//    }
 
 }

@@ -52,19 +52,21 @@ public class StudentService {
         return studentRepository.findStudentByAge(age);
     }
 
-    public Collection<Student> findByAgeBetween(int min, int max){
+    public Collection<Student> findByAgeBetween(int min, int max) {
         return studentRepository.findByAgeBetween(min, max);
     }
 
-    public Collection<Student> findStudentByName(String name){
+    public Collection<Student> findStudentByName(String name) {
         return studentRepository.findStudentByName(name);
     }
 
-    public Collection<Student> findStudentByNameIgnoreCase(String name){
+    public Collection<Student> findStudentByNameIgnoreCase(String name) {
         return studentRepository.findStudentByNameIgnoreCase(name);
     }
 
-
+    public Collection<Student> findStudentByNameIgnoreCaseIsLike(String like) {
+        return studentRepository.findStudentByNameIgnoreCaseIsLike(like);
+    }
 
 
 }

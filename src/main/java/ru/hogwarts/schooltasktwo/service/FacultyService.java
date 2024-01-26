@@ -5,9 +5,11 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.schooltasktwo.model.Faculty;
+import ru.hogwarts.schooltasktwo.model.Student;
 import ru.hogwarts.schooltasktwo.repository.FacultyRepository;
 import ru.hogwarts.schooltasktwo.exception.BadRequestException;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -50,14 +52,12 @@ public class FacultyService {
         return facultyRepository.findFacultyByName(name);
     }
 
-    public List<Faculty> findFacultyByColor(String color) {
-        return facultyRepository.findFacultyByColor(color);
+    public Collection<Faculty> findFacultyByNameIgnoreCase(String name) {
+        return facultyRepository.findFacultyByNameIgnoreCase(name);
     }
 
-//    public List<Faculty> findStudentByFaculty(Long id) {
-//        return facultyRepository.findStudentByFaculty(id);
-//    }
-
-
+    public Collection<Faculty> findFacultyByColorIgnoreCase(String color) {
+        return facultyRepository.findFacultyByColorIgnoreCase(color);
+    }
 
 }

@@ -18,4 +18,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Collection<Student> findStudentByNameIgnoreCase(String name);
 
+    Collection<Student> findStudentByNameIgnoreCaseIsLike(String like);
+
 }

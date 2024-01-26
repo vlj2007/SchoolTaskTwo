@@ -2,16 +2,15 @@ package ru.hogwarts.schooltasktwo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 public class Faculty {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column
     private String name;
@@ -33,10 +32,11 @@ public class Faculty {
     public Faculty() {
     }
 
-    public Faculty(long id, String name, String color) {
+    public Faculty(String name, String color) {
         this.id = id;
         this.name = name;
         this.color = color;
+        this.student = student;
     }
 
     public long getId() {

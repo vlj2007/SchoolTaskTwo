@@ -4,8 +4,6 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 public class Student {
@@ -28,6 +26,13 @@ public class Student {
     }
 
     public Student() {
+    }
+
+    public Student(String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.faculty = faculty;
     }
 
     public Student(long id, String name, int age) {
