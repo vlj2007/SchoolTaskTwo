@@ -14,7 +14,6 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-
     public StudentService() {
     }
 
@@ -50,14 +49,9 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public List<Student> findStudentByAge(int age) {
-        return studentRepository.findStudentByAge(age);
+    public Collection<Student> findByAgeBetween(Integer min, Integer max) {
+        return studentRepository.findByAgeBetween(min, max);
     }
-
-
- //   public Collection<Student> findByAgeBetween(Integer min, Integer max) {
-//        return studentRepository.findByAgeBetween(min, max);
- //   }
 
 
 }
